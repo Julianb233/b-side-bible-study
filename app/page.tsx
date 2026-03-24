@@ -1,5 +1,7 @@
 import { SignupForm } from './signup-form'
 import { AnimatedSection } from './components/animated-section'
+import { Navigation } from './components/navigation'
+import { Gallery } from './components/gallery'
 
 const PILLARS = [
   { icon: '🔥', title: 'BBQ', desc: 'Real food, grilled fresh every session. Ribs, burgers, and sides — because fellowship is better with a full plate.' },
@@ -17,8 +19,10 @@ const WAYS_TO_JOIN = [
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <Navigation />
+
       {/* Hero */}
-      <section className="relative flex min-h-[90vh] flex-col items-center justify-center bg-gradient-to-br from-ocean-700 via-ocean-500 to-ocean-300 px-6 text-center text-white">
+      <section id="hero" className="relative flex min-h-[90vh] flex-col items-center justify-center bg-gradient-to-br from-ocean-700 via-ocean-500 to-ocean-300 px-6 text-center text-white">
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative z-10 max-w-3xl">
           <p className="mb-3 text-lg font-medium tracking-widest text-sunset-500 uppercase">
@@ -50,7 +54,7 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <AnimatedSection className="bg-sand-100 px-6 py-20">
+      <AnimatedSection id="about" className="bg-sand-100 px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             What We&apos;re About
@@ -78,7 +82,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* BBQ Experience */}
-      <AnimatedSection className="bg-white px-6 py-20">
+      <AnimatedSection id="bbq" className="bg-white px-6 py-20">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-6 text-center font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             The B-Side BBQ Experience
@@ -153,7 +157,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* God is Great Playlist */}
-      <AnimatedSection className="bg-sand-100 px-6 py-20">
+      <AnimatedSection id="playlist" className="bg-sand-100 px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-2 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             God is Great Playlist
@@ -178,7 +182,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* Get Involved */}
-      <AnimatedSection className="bg-white px-6 py-20">
+      <AnimatedSection id="get-involved" className="bg-white px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             Get Involved
@@ -202,7 +206,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* Men's Group */}
-      <AnimatedSection className="bg-ocean-700 px-6 py-20 text-white">
+      <AnimatedSection id="mens-group" className="bg-ocean-700 px-6 py-20 text-white">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">
             Men&apos;s Group
@@ -219,8 +223,8 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* Gallery placeholder */}
-      <AnimatedSection className="bg-sand-100 px-6 py-20">
+      {/* Gallery */}
+      <AnimatedSection id="gallery" className="bg-sand-100 px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             Gallery
@@ -228,37 +232,66 @@ export default function Home() {
           <p className="mb-8 text-lg text-gray-600">
             Scenes from past gatherings
           </p>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-            {['🌅 Sunset worship', '🔥 Fire pit talks', '🍖 BBQ time', '📖 Bible study', '🏖️ Beach fellowship', '🙏 Prayer circle'].map(
-              (item, i) => (
-                <div
-                  key={i}
-                  className="flex aspect-square items-center justify-center rounded-2xl bg-gradient-to-br from-ocean-300 to-ocean-500 p-4 text-center text-white shadow-md"
-                >
-                  <span className="text-lg font-medium">{item}</span>
-                </div>
-              )
-            )}
-          </div>
-          <p className="mt-6 text-sm text-gray-500">
-            Photo gallery coming soon — follow us for updates!
-          </p>
+          <Gallery />
         </div>
       </AnimatedSection>
 
       {/* Footer */}
-      <footer className="bg-sand-200 px-6 py-12 text-center text-gray-600">
-        <p className="font-serif text-lg font-semibold text-ocean-700">
-          B-Side BBQ Bible Study
-        </p>
-        <p className="mt-2">3381 Oceanfront Walk · Mission Beach, San Diego, CA</p>
-        <p className="mt-1 text-sm">
-          Wednesdays 6 PM · Men&apos;s Group Thursdays 7:30 PM
-        </p>
-        <p className="mt-4 text-sm">
-          &copy; {new Date().getFullYear()} B-Side BBQ Bible Study. All rights
-          reserved.
-        </p>
+      <footer className="bg-drift-700 px-6 py-16 text-sand-200">
+        <div className="mx-auto max-w-4xl">
+          <div className="grid gap-10 md:grid-cols-2">
+            {/* Info */}
+            <div className="text-center md:text-left">
+              <p className="font-serif text-2xl font-bold text-white">
+                B-Side BBQ Bible Study
+              </p>
+              <p className="mt-3 text-sand-300">
+                3381 Oceanfront Walk · Mission Beach, San Diego, CA
+              </p>
+              <p className="mt-1 text-sm text-sand-400">
+                Wednesdays 6 PM · Men&apos;s Group Thursdays 7:30 PM
+              </p>
+              {/* Social Links */}
+              <div className="mt-6 flex justify-center gap-4 md:justify-start">
+                <a
+                  href="https://www.instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-white/10 p-3 text-white transition hover:bg-sunset-500"
+                  aria-label="Instagram"
+                >
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a
+                  href="https://www.youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-white/10 p-3 text-white transition hover:bg-sunset-500"
+                  aria-label="YouTube"
+                >
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+              </div>
+            </div>
+            {/* Map */}
+            <div className="overflow-hidden rounded-xl">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3357.5!2d-117.2527!3d32.7697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDQ2JzEwLjkiTiAxMTfCsDE1JzA5LjciVw!5e0!3m2!1sen!2sus!4v1"
+                width="100%"
+                height="250"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="B-Side BBQ Bible Study location"
+              />
+            </div>
+          </div>
+          <p className="mt-10 text-center text-sm text-drift-400">
+            &copy; {new Date().getFullYear()} B-Side BBQ Bible Study. All rights
+            reserved.
+          </p>
+        </div>
       </footer>
     </main>
   )
