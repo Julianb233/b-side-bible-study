@@ -48,6 +48,7 @@ export function Gallery() {
           <button
             key={i}
             onClick={() => setSelectedIndex(i)}
+            aria-label={`View ${item.title}`}
             className={`flex aspect-square items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} p-4 text-center text-white shadow-md transition hover:scale-[1.02] hover:shadow-lg cursor-pointer`}
           >
             <div>
@@ -64,6 +65,9 @@ export function Gallery() {
       {/* Lightbox */}
       {selectedIndex !== null && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Gallery: ${GALLERY_ITEMS[selectedIndex].title}`}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={close}
         >

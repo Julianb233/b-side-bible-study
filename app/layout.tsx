@@ -99,6 +99,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-sand-100 text-drift-700 antialiased">
+        <a href="#about" className="skip-to-content">
+          Skip to main content
+        </a>
         {children}
       </body>
     </html>

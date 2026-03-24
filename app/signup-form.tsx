@@ -51,28 +51,37 @@ export function SignupForm() {
       className="mx-auto max-w-md space-y-3"
       onSubmit={handleSubmit}
     >
+      <label htmlFor="signup-name" className="sr-only">Your name</label>
       <input
+        id="signup-name"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Your name"
-        className="w-full rounded-xl border-0 bg-white/20 px-5 py-3 text-white placeholder-white/60 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sunset-500"
+        aria-label="Your name"
+        className="w-full rounded-xl border-0 bg-white/20 px-5 py-3 text-white placeholder-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sunset-500"
         required
       />
+      <label htmlFor="signup-email" className="sr-only">Email address</label>
       <input
+        id="signup-email"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your@email.com"
-        className="w-full rounded-xl border-0 bg-white/20 px-5 py-3 text-white placeholder-white/60 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sunset-500"
+        aria-label="Email address"
+        className="w-full rounded-xl border-0 bg-white/20 px-5 py-3 text-white placeholder-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sunset-500"
         required
       />
+      <label htmlFor="signup-phone" className="sr-only">Phone number (optional)</label>
       <input
+        id="signup-phone"
         type="tel"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         placeholder="Phone (optional)"
-        className="w-full rounded-xl border-0 bg-white/20 px-5 py-3 text-white placeholder-white/60 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sunset-500"
+        aria-label="Phone number (optional)"
+        className="w-full rounded-xl border-0 bg-white/20 px-5 py-3 text-white placeholder-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sunset-500"
       />
       <label className="flex items-center gap-3 rounded-xl bg-white/10 px-5 py-3 text-sm text-white/90 cursor-pointer">
         <input
