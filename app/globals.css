@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  /* Nautical Ocean Blues */
+  --color-ocean-700: #0077B6;
+  --color-ocean-500: #00B4D8;
+  --color-ocean-300: #90E0EF;
+  --color-ocean-100: #CAF0F8;
+
+  /* Sandy Whites */
+  --color-sand-100: #FEFAE0;
+  --color-sand-200: #F5F5DC;
+  --color-sand-300: #E9E5D6;
+
+  /* Sunset Accents */
+  --color-sunset-500: #F4A261;
+  --color-sunset-600: #E76F51;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Georgia', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+}
