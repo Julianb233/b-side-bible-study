@@ -1,30 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  /* Nautical Ocean Blues */
+  /* ── Nautical Ocean Blues ── */
+  --color-ocean-900: #023E8A;
+  --color-ocean-800: #0057A8;
   --color-ocean-700: #0077B6;
+  --color-ocean-600: #0096C7;
   --color-ocean-500: #00B4D8;
+  --color-ocean-400: #48CAE4;
   --color-ocean-300: #90E0EF;
+  --color-ocean-200: #ADE8F4;
   --color-ocean-100: #CAF0F8;
 
-  /* Sandy Whites */
+  /* ── Sandy Whites ── */
+  --color-sand-50: #FFFDF5;
   --color-sand-100: #FEFAE0;
   --color-sand-200: #F5F5DC;
   --color-sand-300: #E9E5D6;
+  --color-sand-400: #D4CFC2;
 
-  /* Sunset Accents */
+  /* ── Sunset Accents ── */
+  --color-sunset-400: #F9C784;
   --color-sunset-500: #F4A261;
   --color-sunset-600: #E76F51;
+  --color-sunset-700: #D4533B;
 
-  /* Driftwood / Neutrals */
+  /* ── Driftwood / Neutrals ── */
+  --color-drift-100: #F5F0EB;
+  --color-drift-200: #E8DDD4;
+  --color-drift-300: #C4B5A5;
+  --color-drift-400: #9E8E7E;
   --color-drift-500: #7A6B5D;
+  --color-drift-600: #5C4F44;
+  --color-drift-700: #3D352E;
 
-  /* Ocean extras */
-  --color-ocean-900: #023E8A;
-
-  /* Typography */
+  /* ── Typography ── */
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Georgia', serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 }
 
 html {
