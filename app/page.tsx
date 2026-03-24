@@ -1,6 +1,7 @@
 import { SignupForm } from './signup-form'
 import { AnimatedSection } from './components/animated-section'
 import { Navigation } from './components/navigation'
+import { Gallery } from './components/gallery'
 
 const PILLARS = [
   { icon: '🔥', title: 'BBQ', desc: 'Real food, grilled fresh every session. Ribs, burgers, and sides — because fellowship is better with a full plate.' },
@@ -231,21 +232,7 @@ export default function Home() {
           <p className="mb-8 text-lg text-gray-600">
             Scenes from past gatherings
           </p>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-            {['🌅 Sunset worship', '🔥 Fire pit talks', '🍖 BBQ time', '📖 Bible study', '🏖️ Beach fellowship', '🙏 Prayer circle'].map(
-              (item, i) => (
-                <div
-                  key={i}
-                  className="flex aspect-square items-center justify-center rounded-2xl bg-gradient-to-br from-ocean-300 to-ocean-500 p-4 text-center text-white shadow-md"
-                >
-                  <span className="text-lg font-medium">{item}</span>
-                </div>
-              )
-            )}
-          </div>
-          <p className="mt-6 text-sm text-gray-500">
-            Photo gallery coming soon — follow us for updates!
-          </p>
+          <Gallery />
         </div>
       </AnimatedSection>
 
