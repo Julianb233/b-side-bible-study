@@ -1,5 +1,6 @@
 import { SignupForm } from './signup-form'
 import { AnimatedSection } from './components/animated-section'
+import { Navigation } from './components/navigation'
 
 const PILLARS = [
   { icon: '🔥', title: 'BBQ', desc: 'Real food, grilled fresh every session. Ribs, burgers, and sides — because fellowship is better with a full plate.' },
@@ -17,8 +18,10 @@ const WAYS_TO_JOIN = [
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <Navigation />
+
       {/* Hero */}
-      <section className="relative flex min-h-[90vh] flex-col items-center justify-center bg-gradient-to-br from-ocean-700 via-ocean-500 to-ocean-300 px-6 text-center text-white">
+      <section id="hero" className="relative flex min-h-[90vh] flex-col items-center justify-center bg-gradient-to-br from-ocean-700 via-ocean-500 to-ocean-300 px-6 text-center text-white">
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative z-10 max-w-3xl">
           <p className="mb-3 text-lg font-medium tracking-widest text-sunset-500 uppercase">
@@ -50,7 +53,7 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <AnimatedSection className="bg-sand-100 px-6 py-20">
+      <AnimatedSection id="about" className="bg-sand-100 px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             What We&apos;re About
@@ -78,7 +81,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* BBQ Experience */}
-      <AnimatedSection className="bg-white px-6 py-20">
+      <AnimatedSection id="bbq" className="bg-white px-6 py-20">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-6 text-center font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             The B-Side BBQ Experience
@@ -153,7 +156,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* God is Great Playlist */}
-      <AnimatedSection className="bg-sand-100 px-6 py-20">
+      <AnimatedSection id="playlist" className="bg-sand-100 px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-2 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             God is Great Playlist
@@ -178,7 +181,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* Get Involved */}
-      <AnimatedSection className="bg-white px-6 py-20">
+      <AnimatedSection id="get-involved" className="bg-white px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             Get Involved
@@ -202,7 +205,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* Men's Group */}
-      <AnimatedSection className="bg-ocean-700 px-6 py-20 text-white">
+      <AnimatedSection id="mens-group" className="bg-ocean-700 px-6 py-20 text-white">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">
             Men&apos;s Group
@@ -219,8 +222,8 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* Gallery placeholder */}
-      <AnimatedSection className="bg-sand-100 px-6 py-20">
+      {/* Gallery */}
+      <AnimatedSection id="gallery" className="bg-sand-100 px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-serif text-3xl font-bold text-ocean-700 md:text-4xl">
             Gallery

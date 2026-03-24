@@ -16,6 +16,12 @@
   --color-sunset-500: #F4A261;
   --color-sunset-600: #E76F51;
 
+  /* Driftwood / Neutrals */
+  --color-drift-500: #7A6B5D;
+
+  /* Ocean extras */
+  --color-ocean-900: #023E8A;
+
   /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Georgia', serif;
@@ -23,6 +29,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
 }
 
 body {
