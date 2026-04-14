@@ -1,28 +1,52 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
-const NAV_LINKS = [
-  { href: '#about', label: 'About' },
-  { href: '#bbq', label: 'BBQ' },
-  { href: '#next-event', label: 'Next Event' },
-  { href: '#playlist', label: 'Playlist' },
-  { href: '#get-involved', label: 'Get Involved' },
-  { href: '#mens-group', label: "Men's Group" },
-  { href: '#gallery', label: 'Gallery' },
+type NavLink = {
+  href: string
+  label: string
+  type: 'anchor' | 'page'
+}
+
+const HOME_NAV_LINKS: NavLink[] = [
+  { href: '#about', label: 'About', type: 'anchor' },
+  { href: '#bbq', label: 'BBQ', type: 'anchor' },
+  { href: '#next-event', label: 'Next Event', type: 'anchor' },
+  { href: '#playlist', label: 'Playlist', type: 'anchor' },
+  { href: '#get-involved', label: 'Get Involved', type: 'anchor' },
+  { href: '#mens-group', label: "Men's Group", type: 'anchor' },
+  { href: '#gallery', label: 'Gallery', type: 'anchor' },
+]
+
+const PAGE_NAV_LINKS: NavLink[] = [
+  { href: '/about', label: 'About', type: 'page' },
+  { href: '/events', label: 'Events', type: 'page' },
+  { href: '/gallery', label: 'Gallery', type: 'page' },
 ]
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+
+  // On the home page, show anchor links + page links
+  // On subpages, show page links only
+  const navLinks: NavLink[] = isHome
+    ? [...HOME_NAV_LINKS, ...PAGE_NAV_LINKS.filter((p) => !HOME_NAV_LINKS.some((h) => h.label === p.label))]
+    : PAGE_NAV_LINKS
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 50)
 
-    // Find active section
-    const sections = NAV_LINKS.map((link) => link.href.slice(1))
+    if (!isHome) return
+
+    // Find active section (only for anchor links on home page)
+    const sections = HOME_NAV_LINKS.map((link) => link.href.slice(1))
     let current = ''
     for (const id of sections) {
       const el = document.getElementById(id)
@@ -34,7 +58,7 @@ export function Navigation() {
       }
     }
     setActiveSection(current)
-  }, [])
+  }, [isHome])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -48,13 +72,18 @@ export function Navigation() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     setIsOpen(false)
     const el = document.getElementById(href.slice(1))
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  const isActive = (link: NavLink) => {
+    if (link.type === 'anchor') return activeSection === link.href.slice(1)
+    return pathname === link.href
   }
 
   return (
@@ -68,40 +97,54 @@ export function Navigation() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         {/* Logo / Brand */}
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault()
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setIsOpen(false)
-          }}
+        <Link
+          href="/"
+          onClick={() => setIsOpen(false)}
           className={`font-serif text-xl font-bold transition-colors ${
             scrolled ? 'text-ocean-700' : 'text-white'
           }`}
         >
           B-Side BBQ
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-all ${
-                activeSection === link.href.slice(1)
-                  ? scrolled
-                    ? 'bg-ocean-100 text-ocean-700'
-                    : 'bg-white/20 text-white'
-                  : scrolled
-                    ? 'text-drift-500 hover:text-ocean-700'
-                    : 'text-white/80 hover:text-white'
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.type === 'anchor' ? (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleAnchorClick(e, link.href)}
+                className={`rounded-full px-3 py-1.5 text-sm font-medium transition-all ${
+                  isActive(link)
+                    ? scrolled
+                      ? 'bg-ocean-100 text-ocean-700'
+                      : 'bg-white/20 text-white'
+                    : scrolled
+                      ? 'text-drift-500 hover:text-ocean-700'
+                      : 'text-white/80 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-full px-3 py-1.5 text-sm font-medium transition-all ${
+                  isActive(link)
+                    ? scrolled
+                      ? 'bg-ocean-100 text-ocean-700'
+                      : 'bg-white/20 text-white'
+                    : scrolled
+                      ? 'text-drift-500 hover:text-ocean-700'
+                      : 'text-white/80 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Mobile Hamburger */}
@@ -138,31 +181,42 @@ export function Navigation() {
         </div>
 
         <div className="flex flex-col items-center gap-2 px-6 pt-8">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              setIsOpen(false)
-            }}
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
             className="mb-6 font-serif text-2xl font-bold text-white"
           >
             B-Side BBQ Bible Study
-          </a>
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className={`w-full max-w-xs rounded-xl px-6 py-3 text-center text-lg font-medium transition-all ${
-                activeSection === link.href.slice(1)
-                  ? 'bg-sunset-500 text-white'
-                  : 'text-ocean-100 hover:bg-white/10'
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          </Link>
+          {navLinks.map((link) =>
+            link.type === 'anchor' ? (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleAnchorClick(e, link.href)}
+                className={`w-full max-w-xs rounded-xl px-6 py-3 text-center text-lg font-medium transition-all ${
+                  isActive(link)
+                    ? 'bg-sunset-500 text-white'
+                    : 'text-ocean-100 hover:bg-white/10'
+                }`}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`w-full max-w-xs rounded-xl px-6 py-3 text-center text-lg font-medium transition-all ${
+                  isActive(link)
+                    ? 'bg-sunset-500 text-white'
+                    : 'text-ocean-100 hover:bg-white/10'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
       </div>
     </nav>
